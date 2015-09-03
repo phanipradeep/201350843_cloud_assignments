@@ -40,11 +40,15 @@ def emptyNet():
 	if i+2 < no_of_switches:
 		net.addLinks(switches[i],switches[i+2])
 	if i%2 == 0 :
-		net.addLinks(switches[i],hosts[2*i])
-		net.addLinks(switches[i],hosts[2*i+2])
+		t1=net.addLinks(switches[i],hosts[2*i])
+		t2=net.addLinks(switches[i],hosts[2*i+2])
+		t1.intf1.config(bw = 2)
+		t2.intf1.config(bw = 2)
 	else:
-		net.addLinks(switches[i],hosts[2*i-1])
-		net.addLinks(switches[i],hosts[2*i+1])
+		k1=net.addLinks(switches[i],hosts[2*i-1])
+		k2=net.addLinks(switches[i],hosts[2*i+1])
+		k1.intf1.config(bw = 1)
+		k2.intf1.config(bw = 1)
 
     info( '*** Starting network\n')
     net.start()
